@@ -16,19 +16,21 @@ public class Main {
 		int opcion;
 
 		do {
-			System.out.println("Menú:");
-			System.out.println("1 - Registrar terreno");
-			System.out.println("2 - Registrar vivienda");
-			System.out.println("3 - Registrar cliente");
-			System.out.println("4 - Alquiler de vivienda");
-			System.out.println("5 - Venta de terreno");
-			System.out.println("6 - Consultar inmuebles disponibles");
-			System.out.println("7 - Consultar viviendas alquiladas");
-			System.out.println("8 - Consultar terrenos vendidos");
-			System.out.println("9 - Salir");
+			System.out.println("----Menu----");
+			System.out.println("[1] Registrar terreno");
+			System.out.println("[2] Registrar vivienda");
+			System.out.println("[3] Registrar cliente");
+			System.out.println("[4] Alquiler de vivienda");
+			System.out.println("[5] Venta de terreno");
+			System.out.println("[6] Consultar inmuebles disponibles");
+			System.out.println("[7] Consultar viviendas alquiladas");
+			System.out.println("[8] Consultar terrenos vendidos");
+			System.out.println("[9] Salir");
 			System.out.print("Seleccione una opción: ");
 			opcion = sc.nextInt();
-
+			
+			System.out.println(" ");
+			
 			switch (opcion) {
 			case 1:
 				registrarTerreno(sc);
@@ -60,6 +62,7 @@ public class Main {
 			default:
 				System.out.println("Opción inválida.");
 			}
+			System.out.println(" ");
 		} while (opcion != 9);
 
 		sc.close();
