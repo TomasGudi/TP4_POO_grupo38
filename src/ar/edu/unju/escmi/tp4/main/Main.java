@@ -119,7 +119,7 @@ public class Main {
 		String email = sc.next();
 		System.out.print("Ingrese direccion: ");
 		String direccion = sc.next();
-		
+    
 		clientes.add(new Cliente(nombre, apellido, dni, telefono, email, direccion));
 		System.out.println("Cliente registrado exitosamente.");
 	}
