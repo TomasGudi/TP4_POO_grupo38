@@ -18,7 +18,6 @@ public class CollectionInmueble {
         System.out.println("Vivienda agregada exitosamente.");
     }
 
-    // Método para buscar un terreno por código
     public static Terreno buscarTerrenoPorCodigo(String codigo) {
         for (Terreno terreno : terrenos) {
             if (terreno.getCodigo().equals(codigo)) {

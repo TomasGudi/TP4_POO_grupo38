@@ -5,12 +5,14 @@ public class ContratoAlquiler {
     private Cliente cliente;
     private double gastosInmobiliaria;
     private int duracion;
+    private String fechaContrato;
 
-    public ContratoAlquiler(Vivienda vivienda, Cliente cliente, double gastosInmobiliaria, int duracion) {
+    public ContratoAlquiler(Vivienda vivienda, Cliente cliente, double gastosInmobiliaria, int duracion, String fechaContrato) {
         this.vivienda = vivienda;
         this.cliente = cliente;
         this.gastosInmobiliaria = gastosInmobiliaria;
         this.duracion = duracion;
+        this.fechaContrato = fechaContrato;
     }
 
     public double calcularMontoTotal() {
@@ -18,6 +20,6 @@ public class ContratoAlquiler {
     }
 
     public void mostrarDatos() {
-        System.out.println("Contrato de Alquiler [Vivienda: " + vivienda.getCodigo() + ", Cliente: " + cliente.getDni() + "]");
+        System.out.println("Contrato de Alquiler [Vivienda: " + vivienda.getCodigo() + ", Cliente: " + cliente.getDni() + ", Duración: " + duracion + " meses, Gastos: $" + gastosInmobiliaria + ", Fecha de Contrato: " + fechaContrato + "]");
     }
 }
