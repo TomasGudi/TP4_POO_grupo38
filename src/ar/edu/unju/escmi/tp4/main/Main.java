@@ -3,6 +3,12 @@ package ar.edu.unju.escmi.tp4.main;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import ar.edu.unju.escmi.tp4.dominio.Cliente;
+import ar.edu.unju.escmi.tp4.dominio.ContratoAlquiler;
+import ar.edu.unju.escmi.tp4.dominio.ContratoCompraVenta;
+import ar.edu.unju.escmi.tp4.dominio.Terreno;
+import ar.edu.unju.escmi.tp4.dominio.Vivienda;
+
 public class Main {
 	
 	public static ArrayList<Terreno> terrenos = new ArrayList<>();
@@ -107,9 +113,14 @@ public class Main {
 		String apellido = sc.next();
 		System.out.print("Ingrese DNI: ");
 		String dni = sc.next();
-		System.out.print("Ingrese teléfono: ");
+		System.out.print("Ingrese telefono: ");
 		String telefono = sc.next();
-		clientes.add(new Cliente(nombre, apellido, dni, telefono));
+		System.out.print("Ingrese email: ");
+		String email = sc.next();
+		System.out.print("Ingrese direccion: ");
+		String direccion = sc.next();
+    
+		clientes.add(new Cliente(nombre, apellido, dni, telefono, email, direccion));
 		System.out.println("Cliente registrado exitosamente.");
 	}
 
@@ -129,8 +140,10 @@ public class Main {
 				int duracion = sc.nextInt();
 				System.out.print("Ingrese los gastos de la inmobiliaria: ");
 				double gastosInmobiliaria = sc.nextDouble();
+				System.out.print("Ingrese la fecha del contrato: ");
+				String fechaContrato = sc.next();
 
-				ContratoAlquiler contrato = new ContratoAlquiler(vivienda, cliente, gastosInmobiliaria, duracion);
+				ContratoAlquiler contrato = new ContratoAlquiler(vivienda, cliente, gastosInmobiliaria, duracion, fechaContrato);
 				contratosAlquiler.add(contrato);
 				vivienda.setDisponible(false);
 
@@ -157,8 +170,10 @@ public class Main {
 			if (cliente != null) {
 				System.out.print("Ingrese el valor de los impuestos: ");
 				double impuestos = sc.nextDouble();
+				System.out.print("Ingrese la fecha del contrato: ");
+				String fechaContrato = sc.next();
 
-				ContratoCompraVenta contrato = new ContratoCompraVenta(terreno, cliente, impuestos);
+				ContratoCompraVenta contrato = new ContratoCompraVenta(terreno, cliente, impuestos, fechaContrato);
 				contratosVenta.add(contrato);
 				terreno.setDisponible(false);
 

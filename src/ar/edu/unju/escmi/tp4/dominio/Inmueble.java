@@ -21,7 +21,6 @@ public abstract class Inmueble {
         this.disponible = disponible;
     }
 
-    // Método abstracto que debe ser implementado por las subclases
     public abstract void mostrarDatos();
 }
 
