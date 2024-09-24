@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-	// Colecciones para almacenar los objetos
+	
 	public static ArrayList<Terreno> terrenos = new ArrayList<>();
 	public static ArrayList<Vivienda> viviendas = new ArrayList<>();
 	public static ArrayList<Cliente> clientes = new ArrayList<>();
@@ -68,7 +68,7 @@ public class Main {
 		sc.close();
 	}
 
-	// Metodos para registrar un terreno
+	
 	public static void registrarTerreno(Scanner sc) {
 		System.out.print("Ingrese el código del terreno: ");
 		String codigo = sc.next();
@@ -84,7 +84,7 @@ public class Main {
 		System.out.println("Terreno registrado exitosamente.");
 	}
 
-	// Metodos para registrar una vivienda
+	
 	public static void registrarVivienda(Scanner sc) {
 		System.out.print("Ingrese el código de la vivienda: ");
 		String codigo = sc.next();
@@ -99,7 +99,7 @@ public class Main {
 		System.out.println("Vivienda registrada exitosamente.");
 	}
 
-	// Metodos para registrar un cliente
+
 	public static void registrarCliente(Scanner sc) {
 		System.out.print("Ingrese nombre del cliente: ");
 		String nombre = sc.next();
@@ -113,7 +113,7 @@ public class Main {
 		System.out.println("Cliente registrado exitosamente.");
 	}
 
-	// Metodos para realizar el alquiler de una vivienda
+
 	public static void alquilerVivienda(Scanner sc) {
 		System.out.print("Ingrese el código de la vivienda: ");
 		String codigoVivienda = sc.next();
@@ -143,7 +143,7 @@ public class Main {
 		}
 	}
 
-	// Metodos para realizar la venta de un terreno
+
 	public static void ventaTerreno(Scanner sc) {
 		System.out.print("Ingrese el código del terreno: ");
 		String codigoTerreno = sc.next();
@@ -171,7 +171,7 @@ public class Main {
 		}
 	}
 
-	// Metodos para consultar inmuebles disponibles
+
 	public static void consultarInmueblesDisponibles(Scanner sc) {
 		System.out.print("¿Desea ver 1- Viviendas o 2- Terrenos? ");
 		int tipo = sc.nextInt();
@@ -193,14 +193,14 @@ public class Main {
 		}
 	}
 
-	// Metodo para consultar viviendas alquiladas
+
 	public static void consultarViviendasAlquiladas() {
 		for (ContratoAlquiler contrato : contratosAlquiler) {
 			contrato.mostrarDatos();
 		}
 	}
 
-	// Metodo para consultar terrenos vendidos
+
 	public static void consultarTerrenosVendidos() {
 		double totalVentas = 0;
 		for (ContratoCompraVenta contrato : contratosVenta) {
@@ -210,7 +210,7 @@ public class Main {
 		System.out.println("Total de ventas de terrenos: $" + totalVentas);
 	}
 
-	// Buscar una vivienda por código
+
 	public static Vivienda buscarVivienda(String codigo) {
 		for (Vivienda vivienda : viviendas) {
 			if (vivienda.getCodigo().equals(codigo)) {
@@ -220,7 +220,7 @@ public class Main {
 		return null;
 	}
 
-	// Buscar un terreno por código
+
 	public static Terreno buscarTerreno(String codigo) {
 		for (Terreno terreno : terrenos) {
 			if (terreno.getCodigo().equals(codigo)) {
@@ -230,7 +230,7 @@ public class Main {
 		return null;
 	}
 
-	// Buscar un cliente por DNI
+
 	public static Cliente buscarCliente(String dni) {
 		for (Cliente cliente : clientes) {
 			if (cliente.getDni().equals(dni)) {
