@@ -73,7 +73,6 @@ public class Main {
 
 		sc.close();
 	}
-
 	
 	public static void registrarTerreno(Scanner sc) {
 		System.out.print("Ingrese el código del terreno: ");
