@@ -1,8 +1,11 @@
 package ar.edu.unju.escmi.tp4.main;
 
-import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
+import ar.edu.unju.escmi.tp4.collections.CollectionCliente;
+import ar.edu.unju.escmi.tp4.collections.CollectionContrato;
+import ar.edu.unju.escmi.tp4.collections.CollectionInmueble;
 import ar.edu.unju.escmi.tp4.dominio.Cliente;
 import ar.edu.unju.escmi.tp4.dominio.ContratoAlquiler;
 import ar.edu.unju.escmi.tp4.dominio.ContratoCompraVenta;
@@ -10,12 +13,6 @@ import ar.edu.unju.escmi.tp4.dominio.Terreno;
 import ar.edu.unju.escmi.tp4.dominio.Vivienda;
 
 public class Main {
-	
-	public static ArrayList<Terreno> terrenos = new ArrayList<>();
-	public static ArrayList<Vivienda> viviendas = new ArrayList<>();
-	public static ArrayList<Cliente> clientes = new ArrayList<>();
-	public static ArrayList<ContratoAlquiler> contratosAlquiler = new ArrayList<>();
-	public static ArrayList<ContratoCompraVenta> contratosVenta = new ArrayList<>();
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -57,10 +54,10 @@ public class Main {
 				consultarInmueblesDisponibles(sc);
 				break;
 			case 7:
-				consultarViviendasAlquiladas();
+				CollectionContrato.calcularViviendasAlquiladas();
 				break;
 			case 8:
-				consultarTerrenosVendidos();
+				CollectionContrato.consultarTerrenosVendidos();
 				break;
 			case 9:
 				System.out.println("Saliendo...");
@@ -84,8 +81,8 @@ public class Main {
 		System.out.print("Ingrese superficie (m²): ");
 		double superficie = sc.nextDouble();
 		System.out.print("Ingrese precio: ");
-		double precio = sc.nextDouble();
-		terrenos.add(new Terreno(codigo, true, latitud, longitud, superficie, precio));
+		float precio = sc.nextFloat();
+		CollectionInmueble.agregarTerreno(new Terreno(codigo, true, latitud, longitud, superficie, precio));
 		System.out.println("Terreno registrado exitosamente.");
 	}
 
@@ -99,8 +96,8 @@ public class Main {
 		System.out.print("Ingrese cantidad de habitaciones: ");
 		int habitaciones = sc.nextInt();
 		System.out.print("Ingrese el precio de alquiler mensual: ");
-		double precioAlquiler = sc.nextDouble();
-		viviendas.add(new Vivienda(codigo, true, direccion, habitaciones, precioAlquiler));
+		float precio = sc.nextFloat();
+		CollectionInmueble.agregarVivienda(new Vivienda(codigo, true, direccion, habitaciones, precio));
 		System.out.println("Vivienda registrada exitosamente.");
 	}
 
@@ -119,7 +116,7 @@ public class Main {
 		System.out.print("Ingrese direccion: ");
 		String direccion = sc.next();
     
-		clientes.add(new Cliente(nombre, apellido, dni, telefono, email, direccion));
+		CollectionCliente.agregarCliente(new Cliente(nombre, apellido, dni, telefono, email, direccion));
 		System.out.println("Cliente registrado exitosamente.");
 	}
 
@@ -127,23 +124,25 @@ public class Main {
 	public static void alquilerVivienda(Scanner sc) {
 		System.out.print("Ingrese el código de la vivienda: ");
 		String codigoVivienda = sc.next();
-		Vivienda vivienda = buscarVivienda(codigoVivienda);
+		Vivienda vivienda = CollectionInmueble.buscarViviendaPorCodigo(codigoVivienda);
 
 		if (vivienda != null && vivienda.isDisponible()) {
 			System.out.print("Ingrese DNI del cliente: ");
 			String dniCliente = sc.next();
-			Cliente cliente = buscarCliente(dniCliente);
+			Cliente cliente = CollectionCliente.buscarClientePorDni(dniCliente);
 
 			if (cliente != null) {
+				Random random = new Random();
 				System.out.print("Ingrese la duración del contrato (en meses): ");
 				int duracion = sc.nextInt();
 				System.out.print("Ingrese los gastos de la inmobiliaria: ");
 				double gastosInmobiliaria = sc.nextDouble();
 				System.out.print("Ingrese la fecha del contrato: ");
 				String fechaContrato = sc.next();
-
-				ContratoAlquiler contrato = new ContratoAlquiler(vivienda, cliente, gastosInmobiliaria, duracion, fechaContrato);
-				contratosAlquiler.add(contrato);
+				long codigoC = 10000 + random.nextInt(90000);
+				
+				ContratoAlquiler contrato = new ContratoAlquiler(codigoC, vivienda, cliente, gastosInmobiliaria, duracion, fechaContrato);
+				CollectionContrato.agregarContratoAlquiler(contrato);
 				vivienda.setDisponible(false);
 
 				System.out.println("Alquiler registrado exitosamente. Monto total: $" + contrato.calcularMontoTotal());
@@ -159,21 +158,23 @@ public class Main {
 	public static void ventaTerreno(Scanner sc) {
 		System.out.print("Ingrese el código del terreno: ");
 		String codigoTerreno = sc.next();
-		Terreno terreno = buscarTerreno(codigoTerreno);
+		Terreno terreno = CollectionInmueble.buscarTerrenoPorCodigo(codigoTerreno);
 
 		if (terreno != null && terreno.isDisponible()) {
 			System.out.print("Ingrese DNI del cliente comprador: ");
 			String dniCliente = sc.next();
-			Cliente cliente = buscarCliente(dniCliente);
+			Cliente cliente = CollectionCliente.buscarClientePorDni(dniCliente);
 
 			if (cliente != null) {
+				Random random = new Random();
 				System.out.print("Ingrese el valor de los impuestos: ");
 				double impuestos = sc.nextDouble();
 				System.out.print("Ingrese la fecha del contrato: ");
 				String fechaContrato = sc.next();
+				long codigoC = 10000 + random.nextInt(90000);
 
-				ContratoCompraVenta contrato = new ContratoCompraVenta(terreno, cliente, impuestos, fechaContrato);
-				contratosVenta.add(contrato);
+				ContratoCompraVenta contrato = new ContratoCompraVenta(codigoC, terreno, cliente, impuestos, fechaContrato);
+				CollectionContrato.agregarContratoCompraVenta(contrato);
 				terreno.setDisponible(false);
 
 				System.out.println("Venta registrada exitosamente. Monto total: $" + contrato.calcularMontoTotal());
@@ -191,66 +192,15 @@ public class Main {
 		int tipo = sc.nextInt();
 
 		if (tipo == 1) {
-			for (Vivienda vivienda : viviendas) {
-				if (vivienda.isDisponible()) {
-					vivienda.mostrarDatos();
-				}
-			}
+			CollectionInmueble.mostrarViviendasDisponibles();
 		} else if (tipo == 2) {
-			for (Terreno terreno : terrenos) {
-				if (terreno.isDisponible()) {
-					terreno.mostrarDatos();
-				}
-			}
+			CollectionInmueble.mostrarTerrenosDisponibles();
 		} else {
 			System.out.println("Opción inválida.");
 		}
 	}
 
-
-	public static void consultarViviendasAlquiladas() {
-		for (ContratoAlquiler contrato : contratosAlquiler) {
-			contrato.mostrarDatos();
-		}
-	}
-
-
-	public static void consultarTerrenosVendidos() {
-		double totalVentas = 0;
-		for (ContratoCompraVenta contrato : contratosVenta) {
-			contrato.mostrarDatos();
-			totalVentas += contrato.calcularMontoTotal();
-		}
-		System.out.println("Total de ventas de terrenos: $" + totalVentas);
-	}
-
-
-	public static Vivienda buscarVivienda(String codigo) {
-		for (Vivienda vivienda : viviendas) {
-			if (vivienda.getCodigo().equals(codigo)) {
-				return vivienda;
-			}
-		}
-		return null;
-	}
-
-
-	public static Terreno buscarTerreno(String codigo) {
-		for (Terreno terreno : terrenos) {
-			if (terreno.getCodigo().equals(codigo)) {
-				return terreno;
-			}
-		}
-		return null;
-	}
-
-
-	public static Cliente buscarCliente(String dni) {
-		for (Cliente cliente : clientes) {
-			if (cliente.getDni().equals(dni)) {
-				return cliente;
-			}
-		}
-		return null;
-	}
+	
 }
+
+

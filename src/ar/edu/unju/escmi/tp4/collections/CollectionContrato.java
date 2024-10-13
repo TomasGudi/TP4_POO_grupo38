@@ -30,12 +30,22 @@ public class CollectionContrato {
         }
     }
 
-    public static double calcularTotalVentasTerrenos() {
+    public static void calcularViviendasAlquiladas() {
         double totalVentas = 0;
-        for (ContratoCompraVenta contrato : contratosCompraVenta) {
+        for (ContratoAlquiler contrato : contratosAlquiler) {
             totalVentas += contrato.calcularMontoTotal();
         }
-        return totalVentas;
+        System.out.println("Total de ventas de terrenos: $" + totalVentas);
     }
+
+
+	public static void consultarTerrenosVendidos() {
+		double totalVentas = 0;
+		for (ContratoCompraVenta contrato : CollectionContrato.contratosCompraVenta) {
+			contrato.mostrarDatos();
+			totalVentas += contrato.calcularMontoTotal();
+		}
+		System.out.println("Total de ventas de terrenos: $" + totalVentas);
+	}
 }
 
