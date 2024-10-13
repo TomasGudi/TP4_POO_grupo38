@@ -1,19 +1,21 @@
 package ar.edu.unju.escmi.tp4.dominio;
 
 public abstract class Inmueble {
-    protected String codigo;
+    protected static String codigo;
     protected boolean disponible;
+    protected float precio;
 
-    public Inmueble(String codigo, boolean disponible) {
-        this.codigo = codigo;
+    public Inmueble(String codigo, float precio, boolean disponible) {
+        Inmueble.codigo = codigo;
+        this.precio = precio;
         this.disponible = disponible;
     }
 
-    public String getCodigo() {
+    public static String getCodigo() {
         return codigo;
     }
-
-    public boolean isDisponible() {
+    
+	public boolean isDisponible() {
         return disponible;
     }
 
